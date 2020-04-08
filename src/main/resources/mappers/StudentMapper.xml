@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pre.ysl.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="pre.ysl.pojo.Student">
+    <constructor>
+      <idArg column="sid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sSex" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sEducation" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sWorkExperience" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sWeChar" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sState" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sCollege" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sStudentNumber" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sGrade" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sCollegeAddress" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sResume" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sid, sName, sSex, sEducation, sWorkExperience, sWeChar, sState, sCollege, sStudentNumber, 
+    sGrade, sCollegeAddress, sResume
+  </sql>
+  <select id="selectByExample" parameterType="pre.ysl.pojo.StudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pre.ysl.pojo.StudentExample">
+    delete from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pre.ysl.pojo.Student">
+    <selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into student (sName, sSex, sEducation, 
+      sWorkExperience, sWeChar, sState, 
+      sCollege, sStudentNumber, sGrade, 
+      sCollegeAddress, sResume)
+    values (#{sname,jdbcType=VARCHAR}, #{ssex,jdbcType=VARCHAR}, #{seducation,jdbcType=VARCHAR}, 
+      #{sworkexperience,jdbcType=VARCHAR}, #{swechar,jdbcType=VARCHAR}, #{sstate,jdbcType=INTEGER}, 
+      #{scollege,jdbcType=VARCHAR}, #{sstudentnumber,jdbcType=VARCHAR}, #{sgrade,jdbcType=VARCHAR}, 
+      #{scollegeaddress,jdbcType=VARCHAR}, #{sresume,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pre.ysl.pojo.Student">
+    <selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sname != null">
+        sName,
+      </if>
+      <if test="ssex != null">
+        sSex,
+      </if>
+      <if test="seducation != null">
+        sEducation,
+      </if>
+      <if test="sworkexperience != null">
+        sWorkExperience,
+      </if>
+      <if test="swechar != null">
+        sWeChar,
+      </if>
+      <if test="sstate != null">
+        sState,
+      </if>
+      <if test="scollege != null">
+        sCollege,
+      </if>
+      <if test="sstudentnumber != null">
+        sStudentNumber,
+      </if>
+      <if test="sgrade != null">
+        sGrade,
+      </if>
+      <if test="scollegeaddress != null">
+        sCollegeAddress,
+      </if>
+      <if test="sresume != null">
+        sResume,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null">
+        #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="seducation != null">
+        #{seducation,jdbcType=VARCHAR},
+      </if>
+      <if test="sworkexperience != null">
+        #{sworkexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="swechar != null">
+        #{swechar,jdbcType=VARCHAR},
+      </if>
+      <if test="sstate != null">
+        #{sstate,jdbcType=INTEGER},
+      </if>
+      <if test="scollege != null">
+        #{scollege,jdbcType=VARCHAR},
+      </if>
+      <if test="sstudentnumber != null">
+        #{sstudentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sgrade != null">
+        #{sgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="scollegeaddress != null">
+        #{scollegeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sresume != null">
+        #{sresume,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pre.ysl.pojo.StudentExample" resultType="java.lang.Long">
+    select count(*) from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update student
+    <set>
+      <if test="record.sid != null">
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null">
+        sName = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssex != null">
+        sSex = #{record.ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seducation != null">
+        sEducation = #{record.seducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sworkexperience != null">
+        sWorkExperience = #{record.sworkexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="record.swechar != null">
+        sWeChar = #{record.swechar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sstate != null">
+        sState = #{record.sstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.scollege != null">
+        sCollege = #{record.scollege,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sstudentnumber != null">
+        sStudentNumber = #{record.sstudentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sgrade != null">
+        sGrade = #{record.sgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scollegeaddress != null">
+        sCollegeAddress = #{record.scollegeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sresume != null">
+        sResume = #{record.sresume,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update student
+    set sid = #{record.sid,jdbcType=INTEGER},
+      sName = #{record.sname,jdbcType=VARCHAR},
+      sSex = #{record.ssex,jdbcType=VARCHAR},
+      sEducation = #{record.seducation,jdbcType=VARCHAR},
+      sWorkExperience = #{record.sworkexperience,jdbcType=VARCHAR},
+      sWeChar = #{record.swechar,jdbcType=VARCHAR},
+      sState = #{record.sstate,jdbcType=INTEGER},
+      sCollege = #{record.scollege,jdbcType=VARCHAR},
+      sStudentNumber = #{record.sstudentnumber,jdbcType=VARCHAR},
+      sGrade = #{record.sgrade,jdbcType=VARCHAR},
+      sCollegeAddress = #{record.scollegeaddress,jdbcType=VARCHAR},
+      sResume = #{record.sresume,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pre.ysl.pojo.Student">
+    update student
+    <set>
+      <if test="sname != null">
+        sName = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null">
+        sSex = #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="seducation != null">
+        sEducation = #{seducation,jdbcType=VARCHAR},
+      </if>
+      <if test="sworkexperience != null">
+        sWorkExperience = #{sworkexperience,jdbcType=VARCHAR},
+      </if>
+      <if test="swechar != null">
+        sWeChar = #{swechar,jdbcType=VARCHAR},
+      </if>
+      <if test="sstate != null">
+        sState = #{sstate,jdbcType=INTEGER},
+      </if>
+      <if test="scollege != null">
+        sCollege = #{scollege,jdbcType=VARCHAR},
+      </if>
+      <if test="sstudentnumber != null">
+        sStudentNumber = #{sstudentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sgrade != null">
+        sGrade = #{sgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="scollegeaddress != null">
+        sCollegeAddress = #{scollegeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sresume != null">
+        sResume = #{sresume,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pre.ysl.pojo.Student">
+    update student
+    set sName = #{sname,jdbcType=VARCHAR},
+      sSex = #{ssex,jdbcType=VARCHAR},
+      sEducation = #{seducation,jdbcType=VARCHAR},
+      sWorkExperience = #{sworkexperience,jdbcType=VARCHAR},
+      sWeChar = #{swechar,jdbcType=VARCHAR},
+      sState = #{sstate,jdbcType=INTEGER},
+      sCollege = #{scollege,jdbcType=VARCHAR},
+      sStudentNumber = #{sstudentnumber,jdbcType=VARCHAR},
+      sGrade = #{sgrade,jdbcType=VARCHAR},
+      sCollegeAddress = #{scollegeaddress,jdbcType=VARCHAR},
+      sResume = #{sresume,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="pre.ysl.pojo.StudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

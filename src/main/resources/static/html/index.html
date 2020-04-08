@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/resume.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body class="body">
+    <div class="head container-fluid">
+
+    </div>
+    <div class="enterpriseInfo container-fluid">
+        <div>
+            <span class="glyphicon glyphicon-remove" id="closeEtps"></span>
+        </div>
+        <div class="etpsInfoTitle">招聘者信息</div>
+        <div class="etpsInfo container-fluid col-sm-7 col-md-7 col-xs-7 col-lg-7">
+            <div class="etpsLine container-fluid">
+                <div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">公司名称：</div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">围开有限公司</div>
+            </div>
+            <div class="etpsLine container-fluid">
+                <div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">公司简介：</div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">软件开发</div>
+            </div>
+            <div class="etpsLine container-fluid">
+                <div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">公司地址：</div>
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">广东海洋大学</div>
+            </div>
+            <div class="etpsLine container-fluid">
+                <div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">公司网页链接：</div>
+                <a class="col-xs-7 col-sm-7 col-md-7 col-lg-7">www.baidu.com</a>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-5 col-lg-5">
+            <img src="../image/etps.jpg" class="etpsBg">
+        </div>
+    </div>
+    <div class="add container-fluid">
+        <div class="fileAdd">
+            <div id="upResume">
+                <div>
+                    <span class="glyphicon glyphicon-plus"></span>
+                </div>
+                <div>添加简历文件</div>
+                <div>(word/pdf/image)</div>
+            </div>
+            <div id="get" class="getResume">
+                <span class="glyphicon glyphicon-ok"></span>
+            </div>
+            <input type="file" id="file">
+        </div>
+        <div class="buttom" id="addResume">确认上传</div>
+        <div class="cancel" id="cancelResume">取消</div>
+    </div>
+    <div class="container-fluid mid">
+        <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8" id="workText">
+            <div class="Search">
+                <div class="seach">
+                    <input value="搜索">
+                    <div class="symble pull-right">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 userInfo">
+            <div class="container-fluid">
+                <div class="img">
+                    <img src="../image/HeadPortrait.jpg" id="img">
+                </div>
+                <div class="name" id="account">游客</div>
+            </div>
+        </div>
+    </div>
+    <div class="message"  onclick = openTalk()>
+        信息接收
+    </div>
+    <div class="communication container-fluid">
+        <div class="closeIt">X</div>
+        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 friend talkLeft">
+            <div>聊天列表</div>
+
+
+        </div>
+        <div class="talkName">昵称</div>
+        <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9 talkRight">
+            <div class="hiddenSs">
+                <div class="talk">
+                </div>
+            </div>
+            <div class="hiddenS">
+                <div class="talk">
+                    <div class="container-fluid talkLine">
+                        <div class="talkHead">
+                            <img src="../image/headImg-Man.jpg">
+                        </div>
+                        <div class="talkText">111</div>
+                    </div>
+                    <div class="container-fluid sendLine">
+
+                        <div class="sendHead">
+                            <img src="../image/headImg-Man.jpg">
+                        </div>
+                        <div class="sendText">111</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="edit">
+                <div class="sendMsg" onclick= sendMsg()>发送</div>
+                <textarea>
+
+                </textarea>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/jquery.cityselect.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/userSelect.js"></script>
+<script src="../js/resume.js"></script>
+<script src="../js/etps.js"></script>
+<script src="../js/index.js"></script>
+</html>

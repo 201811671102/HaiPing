@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pre.ysl.mapper.VolunteerMapper">
+  <resultMap id="BaseResultMap" type="pre.ysl.pojo.Volunteer">
+    <constructor>
+      <idArg column="vid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="vName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="vType" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sTime" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    vid, vName, vType, sTime
+  </sql>
+  <select id="selectByExample" parameterType="pre.ysl.pojo.VolunteerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from volunteer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from volunteer
+    where vid = #{vid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from volunteer
+    where vid = #{vid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pre.ysl.pojo.VolunteerExample">
+    delete from volunteer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pre.ysl.pojo.Volunteer">
+    <selectKey keyProperty="vid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into volunteer (vName, vType, sTime
+      )
+    values (#{vname,jdbcType=VARCHAR}, #{vtype,jdbcType=VARCHAR}, #{stime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pre.ysl.pojo.Volunteer">
+    <selectKey keyProperty="vid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into volunteer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vname != null">
+        vName,
+      </if>
+      <if test="vtype != null">
+        vType,
+      </if>
+      <if test="stime != null">
+        sTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vname != null">
+        #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vtype != null">
+        #{vtype,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null">
+        #{stime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pre.ysl.pojo.VolunteerExample" resultType="java.lang.Long">
+    select count(*) from volunteer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update volunteer
+    <set>
+      <if test="record.vid != null">
+        vid = #{record.vid,jdbcType=INTEGER},
+      </if>
+      <if test="record.vname != null">
+        vName = #{record.vname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vtype != null">
+        vType = #{record.vtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stime != null">
+        sTime = #{record.stime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update volunteer
+    set vid = #{record.vid,jdbcType=INTEGER},
+      vName = #{record.vname,jdbcType=VARCHAR},
+      vType = #{record.vtype,jdbcType=VARCHAR},
+      sTime = #{record.stime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pre.ysl.pojo.Volunteer">
+    update volunteer
+    <set>
+      <if test="vname != null">
+        vName = #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vtype != null">
+        vType = #{vtype,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null">
+        sTime = #{stime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pre.ysl.pojo.Volunteer">
+    update volunteer
+    set vName = #{vname,jdbcType=VARCHAR},
+      vType = #{vtype,jdbcType=VARCHAR},
+      sTime = #{stime,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="pre.ysl.pojo.VolunteerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from volunteer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

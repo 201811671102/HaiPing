@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="src/main/resources/static/mysql-connector-java-5.1.45.jar"/>
+
+    <context id="MysqlTables" targetRuntime="MyBatis3" defaultModelType="flat">
+        
+        <!--生成的java文件的编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <!--分页-->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="addRemarkComments" value="true"/>
+            <!--不生成注释-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/ysl"
+                        userId="CG"
+                        password="CGroot">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/ysl"
+                        userId="root"
+                        password="root">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类
+                   targetPackage     指定生成的model生成所在的包名
+                   targetProject     指定在该项目下所在的路径
+               -->
+        <javaModelGenerator targetPackage="pre.ysl.pojo"
+                            targetProject="src\main\java">
+            <!-- 是否对model添加 构造函数 -->
+            <property name="constructorBased" value="true"/>
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
+            <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
+        <sqlMapGenerator targetPackage="mappers" targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+                        type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+                        type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                        type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+                -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="pre.ysl.mapper"
+                             targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+<!-- 是否对类CHAR类型的列的数据进行trim操作 -->
+<!--        schema即为数据库名, tableName为对应的数据库表, domainObjectName是要生成的实体类
+        如果想要mapper配置文件加入sql的where条件查询, 可以将enableCountByExample等设为true
+        这样就会生成一个对应domainObjectName的Example类, enableCountByExample等设为false时就不会生成对应的Example类了-->
+        <table schema="ysl" tableName="user" enableCountByExample="true" domainObjectName="User">
+            <generatedKey column="uid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="role" enableCountByExample="true" domainObjectName="Role">
+            <generatedKey column="rid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="ur" enableCountByExample="true" domainObjectName="UR">
+            <generatedKey column="urid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+
+        <table schema="ysl" tableName="student" enableCountByExample="true" domainObjectName="Student">
+            <generatedKey column="sid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="certificate" enableCountByExample="true" domainObjectName="Certificate">
+            <generatedKey column="cid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="volunteer" enableCountByExample="true" domainObjectName="Volunteer">
+            <generatedKey column="vid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="sc" enableCountByExample="true" domainObjectName="SC">
+            <generatedKey column="scid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="sv" enableCountByExample="true" domainObjectName="SV">
+            <generatedKey column="svid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="manager" enableCountByExample="true" domainObjectName="Manager">
+            <generatedKey column="mid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="enterprise" enableCountByExample="true" domainObjectName="Enterprise">
+            <generatedKey column="eid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="position"  domainObjectName="Position">
+            <generatedKey column="pid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="sp" enableCountByExample="true" domainObjectName="SP">
+            <generatedKey column="spid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="college" enableCountByExample="true" domainObjectName="College">
+            <generatedKey column="cid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+        <table schema="ysl" tableName="sepc" enableCountByExample="true" domainObjectName="SEPC">
+            <generatedKey column="sepcid" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="apply_for" javaType="com.jd.ins.personal.claim.domain.enums.ApplyForType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+            <!--<ignoreColumn column="create_time"/>-->
+        </table>
+    </context>
+</generatorConfiguration>

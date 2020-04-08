@@ -1,0 +1,204 @@
+.seach{
+    font-size: 20px;
+    padding-left: 10px;
+    border: solid 1px #ff6644;
+    border-radius: 5px;
+}
+.seach input{
+    width: 80%;
+    border: 0px;
+    outline:none;
+    background-color: transparent;
+    font-size: 15px;
+    color: #999999;
+    height: 40px;
+}
+.symble{
+    width: 50px;
+    line-height: 40px;
+    background-color: #ff6644;
+    color: white;
+    text-align: center;
+}
+.mid{
+    padding-left: 100px;
+    padding-top: 30px;
+}
+.workInfo{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+}
+.workInfo>div{
+    display: inline;
+}
+.workInfo>div:nth-child(1){
+    color:  #ff6644;
+}
+
+.gan{
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #9d9d9d;
+
+}
+.work{
+    color: #1d6db5;
+    font-size: 20px;
+}
+.content{
+    background-color: white;
+    padding: 15px;
+    border: #dedede 1px solid;
+    margin-top: 25px;
+    position: relative;
+}
+.addTalker{
+    color:  #ff6644;
+    margin-top: 15px;
+    text-align: right;
+}
+.delect{
+    color: red;
+    font-size: 18px;
+    text-align: right;
+    cursor: pointer;
+}
+.enterprise{
+    border-left: dashed 1px #9d9d9d;
+    height: 90px;
+}
+.enterprise>div{
+    margin-top: 15px;
+}
+.enterprise>div:nth-child(2){
+    color: #9d9d9d;
+}
+.Search{
+    background-color: white;
+    padding: 20px;
+    border: #dedede 1px solid;
+}
+.Lable{
+    margin-top: 0;
+    color: #1d6db5;
+    font-size: 18px;
+    text-align: right;
+}
+.img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    overflow: hidden;
+    float: left;
+    border: #dedede 1px solid;
+}
+.img>img{
+    width: 100%;
+}
+.userInfo{
+    background-color: white;
+    border: #dedede 1px solid;
+    padding: 30px;
+}
+.name{
+    color: #ff6644;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 80px;
+}
+.userInfo>div:nth-child(1){
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 20px;
+}
+.operation{
+    text-align: center;
+    padding-top: 10px;
+}
+.operation>div{
+    color: #1d6db5;
+    font-size: 15px;
+    cursor: pointer;
+}
+.content:hover{
+    background-color: #f1f1f1;
+}
+.Info{
+    color: #1d6db5;
+    font-size: 15px;
+    border-bottom: solid 1px #dedede;
+    padding-bottom: 20px;
+}
+#closeEtps{
+    cursor: pointer;
+}
+.etpsInfoTitle{
+    text-align: center;
+    color: #ff6644;
+    font-size: 20px;
+    margin-top: 10px;
+    border-bottom: 1px solid #dedede;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.etpsLine>div:nth-child(1){
+    color: #ff6644;
+    text-align: right;
+}
+.etpsLine>div:nth-child(2){
+    color: #1d6db5;
+}
+.etpsInfo{
+    padding: 15px;
+}
+.etpsLine{
+    margin-bottom: 15px;
+}
+.enterpriseInfo>div:nth-child(1){
+    text-align: right;
+}
+.enterpriseInfo{
+    display: none;
+    width: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: white;
+    border: 1px solid #dedede;
+    position: absolute;
+    z-index: 10;
+    margin-top: 30px;
+    padding: 10px;
+}
+.etpsBg{
+    width: 150px;
+    margin-left: 50px;
+}
+.Info div{
+    padding: 0;
+}
+.Info>div>div{
+    margin-top: 15px;
+}
+.Info>div>div:nth-child(1){
+    text-align: right;
+}
+.Info>div>div:nth-child(2){
+    text-align: left;
+}
+.upResume{
+    color:  #ff6644;
+    margin-top: 15px;
+    text-align: right;
+    cursor: pointer;
+}
+.buttom{
+    background-color:#ff6644;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    line-height: 40px;
+    height: 40px;
+    margin-top: 40px;
+    cursor: pointer;
+}

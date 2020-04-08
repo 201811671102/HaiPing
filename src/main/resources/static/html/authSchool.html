@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学校认证</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/authSchool.css">
+</head>
+<body>
+<div class="head container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 logo">HP海聘</div>
+        <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7 Nav">
+            <div id="index">首页</div>
+            <div id="studentWork">勤工俭学</div>
+            <div id="schoolSend">学校发布</div>
+            <div id="enterpriseSend">企业发布</div>
+            <div id="adminUser">管理用户</div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3 container-fluid">
+            <div id="city"></div>
+            <div class="cityBlock">
+                <div class="border container-fluid">
+                    <div id="city_3" class=" col-md-7 col-lg-7 col-sm-7 col-xs-7">
+                        <select class="prov" id="selectProvince"></select>
+                        <select class="city" disabled="disabled" id="selectCity"></select>
+                    </div>
+                    <div class="cityButtom col-md-5 col-lg-5 col-sm-5 col-xs-5" id="citySet">确认</div>
+                    <div class="cityButtom col-md-5 col-lg-5 col-sm-5 col-xs-5" id="cancel">取消</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container-fluid mid">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="headLine">学校认证</div>
+        <div class="Line"> 勤工俭学 管理 简易</div>
+        <div  id="teacherName">
+        <div class="line container-fluid">
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">学校名称：</div>
+        <div class="col-md-9 col-lg-9 col-sm-9 col-xs-9">
+        <input id="cname">
+        </div>
+        <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">*</div>
+        </div>
+        <div class="line container-fluid">
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">学校地址：</div>
+        <div class="col-md-9 col-lg-9 col-sm-9 col-xs-9">
+        <input id="caddress">
+        </div>
+        <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">*</div>
+        </div>
+        </div>
+        <div class="line container-fluid">
+            <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2"></div>
+            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-9">
+                <div class="buttom" id="register">认证</div>
+            </div>
+            <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/authSchool.js"></script>
+</html>

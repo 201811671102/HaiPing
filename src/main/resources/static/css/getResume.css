@@ -1,0 +1,138 @@
+.resumes{
+    border: 1px solid #ff6644;
+    background-color: white;
+    padding: 30px;
+    overflow: auto;
+    height: 100%;
+    position: absolute;
+    right: -19px;
+    width: 100%;
+
+}
+.closeResume{
+    background-color: #ff6644;
+    color: white;
+    width: 50px;
+    height: 20px;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 50;
+    cursor: pointer;
+}
+.closeResume:hover{
+    background-color: red;
+}
+.Resumes{
+    height: 450px;
+    display: none;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 10;
+    width: 60%;
+    position: absolute;
+    overflow: hidden;
+    border-right: 1px solid #ff6644;
+}
+.resumes>div:nth-child(1){
+    text-align: center;
+    color: #ff6644;
+    font-size: 20px;
+    border-bottom:2px solid #ff6644;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.resumeImg{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 100px;
+    border: 1px solid #9f9f9f;
+    margin-right: 20px;
+}
+.resumeImg>img{
+    width: 100%;
+}
+.resume>div:nth-child(1){
+    display: flex;
+    border-bottom: 1px dashed #ff6644;
+    padding:10px;
+    /*justify-content: center;*/
+}
+.resume>div:nth-child(1)>div:nth-child(2){
+    height: 100px;
+    padding: 10px;
+}
+.resume>div:nth-child(1)>div:nth-child(2)>div:nth-child(1){
+    color: #ff6644;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.resume{
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border: 1px solid #ff6644;
+    color: #1d6db5;
+    position: relative;
+    margin-bottom: 10px;
+}
+.getImfo{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.getImfo>table{
+    border-collapse:   separate;
+    border-spacing:   10px;
+}
+.getImfo>table:nth-child(2){
+    margin-left: 60px;
+}
+.control{
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.resumeControl{
+    background-color: #1d6db5;
+    color: white;
+    width: 75px;
+    border-radius: 5px;
+}
+.resumeControl:hover{
+    background-color: #23527c;
+}
+.resumeControl>div:nth-child(1){
+    border-right: 1px white solid;
+    padding: 5px;
+    float: left;
+}
+.resumeControl>div:nth-child(2){
+    text-align: center;
+    line-height: 30px;
+}
+.select{
+    color: #1d6db5;
+    background-color: white;
+    border: 1px solid #9f9f9f;
+    display: none;
+}
+.select li{
+    list-style: none;
+
+    padding: 5px;
+}
+.select li:nth-child(1){
+    border-bottom: 1px solid #9f9f9f;
+}
+.select li:hover{
+    background-color: #1d6db5;
+    color: white;
+}

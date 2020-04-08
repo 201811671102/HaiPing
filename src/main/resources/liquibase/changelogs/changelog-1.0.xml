@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <!--如果一开始没用，后期想引入 liquibase，可以把以前的数据库导出成 sql，然后引入 sql 文件-->
+    <!--<include file="liquibase/changelogs/project.sql" relativeToChangelogFile="false"/>-->
+
+    <changeSet id="20200229-01" author="ysl">
+        <!--预判断-->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+                <tableExists tableName="role"/>
+                <tableExists tableName="ur"/>
+                <tableExists tableName="student"/>
+                <tableExists tableName="certificate"/>
+                <tableExists tableName="volunteer"/>
+                <tableExists tableName="scv"/>
+                <tableExists tableName="manager"/>
+                <tableExists tableName="enterprise"/>
+                <tableExists tableName="position"/>
+                <tableExists tableName="collage"/>
+                <tableExists tableName="sepc"/>
+            </not>
+        </preConditions>
+        <!--创建表-->
+        <createTable tableName="user">
+            <column name="uid" type="integer(30)" encoding="utf8" remarks="userid" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="uAccount" type="varchar(50)" encoding="utf8" remarks="user账户">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="uPassword" type="varchar(50)" encoding="utf8" remarks="user密码">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="uPhone" type="varchar(20)" encoding="utf8" remarks="user电话">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="uEmail" type="varchar(30)" encoding="utf8" remarks="user邮箱">
+                <constraints  nullable="true"/>
+            </column>
+            <column name="uPhoto" type="varchar(100)" encoding="utf8" remarks="user头像">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="role">
+            <column name="rid" type="integer(30)" encoding="utf8" remarks="roleid" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="roleType" type="varchar(10)" encoding="utf8" remarks="role角色">
+                <constraints  nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="ur">
+            <column name="urid" type="integer(30)" encoding="utf8" remarks="URid" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="uid" type="integer(30)" encoding="utf8" remarks="用户id">
+                <constraints  nullable="false" unique="true"/>
+            </column>
+            <column name="rid" type="integer(30)" encoding="utf8" remarks="角色id">
+                <constraints  nullable="false" />
+            </column>
+            <column name="id" type="integer(30)" encoding="utf8" remarks="学生，企业，学校id">
+                <constraints  nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="student">  <!--创建表student-->
+            <column name="sid" type="integer(30)" encoding="utf8" remarks="studentid" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="sName" type="varchar(20)" encoding="utf8" remarks="student名字">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="sSex" type="varchar(10)" encoding="utf8" remarks="student性别">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="sEducation" type="varchar(20)" encoding="utf8" remarks="student学历">
+                <constraints  nullable="false"/>
+            </column>
+
+            <column name="sWorkExperience" type="varchar(2000)" encoding="utf8" remarks="student工作经验">
+                <constraints  nullable="true"/>
+            </column>
+            <column name="sWeChar" type="varchar(20)" encoding="utf8" remarks="student微信">
+                <constraints  nullable="true"/>
+            </column>
+            <column name="sState" type="integer(2)" encoding="utf8" remarks="student认证状态">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="sCollege" type="varchar(50)" encoding="utf8" remarks="student大学">
+                <constraints  nullable="true"/>
+            </column>
+            <column name="sStudentNumber" type="varchar(20)" encoding="utf8" remarks="student学号">
+                <constraints  nullable="true"/>
+            </column>
+            <column name="sGrade" type="varchar(20)" encoding="utf8" remarks="student年级">
+                <constraints  nullable="true"/>
+            </column>
+            <column name="sCollegeAddress" type="varchar(300)" encoding="utf8" remarks="大学地址">
+                <constraints  nullable="true"/>
+            </column>
+            <column name="sResume" type="varchar(100)" encoding="utf8" remarks="user简历">
+                <constraints  nullable="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="certificate">  <!--创建表资格证书-->
+            <column name="cid" type="integer(30)" encoding="utf8" remarks="证书id" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="cName" type="varchar(50)" encoding="utf8" remarks="证书名">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="sType" type="varchar(50)" encoding="utf8" remarks="证书所属类">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="volunteer">  <!--创建表志愿服务-->
+            <column name="vid" type="integer(30)" encoding="utf8" remarks="志愿服务id" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="vName" type="varchar(20)" encoding="utf8" remarks="志愿服务名">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="vType" type="varchar(20)" encoding="utf8" remarks="志愿服务所属类">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="sTime" type="varchar(20)" encoding="utf8" remarks="志愿服务时长">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="sc">  <!--创建表关联表 SC-->
+            <column name="scid" type="integer(30)" encoding="utf8" remarks="SCVid" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="sid" type="integer(30)" encoding="utf8" remarks="学生id">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="cid" type="integer(30)" encoding="utf8" remarks="证书id">
+                <constraints  nullable="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="sv">  <!--创建表关联表 SV-->
+            <column name="svid" type="integer(30)" encoding="utf8" remarks="SCVid" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="sid" type="integer(30)" encoding="utf8" remarks="学生id">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="vid" type="integer(30)" encoding="utf8" remarks="志愿服务id">
+                <constraints  nullable="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="manager">  <!--创建表管理员-->
+            <column name="mid" type="integer(30)" encoding="utf8" remarks="管理员" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="mName" type="varchar(20)" encoding="utf8" remarks="管理员名字">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="mAddress" type="varchar(300)" encoding="utf8" remarks="管理员地址">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="enterprise">  <!--创建表企业-->
+            <column name="eid" type="integer(30)" encoding="utf8" remarks="企业id" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="eName" type="varchar(50)" encoding="utf8" remarks="企业名字">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="eIntroduction" type="varchar(2000)" encoding="utf8" remarks="企业简介">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="eAddress" type="varchar(300)" encoding="utf8" remarks="企业地址">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="eURL" type="varchar(100)" encoding="utf8" remarks="企业网页连接">
+                <constraints  nullable="true"/>
+            </column>
+            <column name="eState" type="integer(2)" encoding="utf8" remarks="认证状态">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="position">  <!--创建表职位-->
+            <column name="pid" type="integer(30)" encoding="utf8" remarks="职位id" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="pName" type="varchar(50)" encoding="utf8" remarks="职位名字">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="pType" type="varchar(60)" encoding="utf8" remarks="职位分类">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="pDescribe" type="varchar(2000)" encoding="utf8" remarks="职位描述">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="pRequirements" type="varchar(2000)" encoding="utf8" remarks="职位要求">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="pCompensation" type="integer(20)" encoding="utf8" remarks="职位薪酬">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="pWelfare" type="varchar(2000)" encoding="utf8" remarks="职位福利">
+                <constraints  nullable="true"/>
+            </column>
+            <column name="pAddress" type="varchar(300)" encoding="utf8" remarks="职位工作地址">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="update_time" type="timestamp" encoding="utf8" remarks="更新时间">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="college">  <!--创建表大学用户-->
+            <column name="cid" type="integer(30)" encoding="utf8" remarks="大学用户id" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="cName" type="varchar(50)" encoding="utf8" remarks="大学用户名字">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="cAddress" type="varchar(300)" encoding="utf8" remarks="大学地址">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="cState" type="integer(2)" encoding="utf8" remarks="认证状态">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="sepc">  <!--创建关联表EPC-->
+            <column name="sepcid" type="integer(30)" encoding="utf8" remarks="epcid" autoIncrement="true"> <!--创建属性id-->
+                <constraints primaryKey="true" nullable="false" /> <!--设置为主键-->
+            </column>
+            <column name="secid" type="integer(30)" encoding="utf8" remarks="招聘方id">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="pid" type="integer(30)" encoding="utf8" remarks="岗位id">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="sepcType" type="integer(2)" encoding="utf8" remarks="招聘类型0学校1企业">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="sepcState" type="integer(2)" encoding="utf8" remarks="招聘状态0 1 2">
+                <constraints  nullable="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="sp"><!--创建关联表学生职位-->
+            <column name="spid" type="integer(30)" encoding="utf8" remarks="学生职位关系表" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="pid" type="integer(30)" encoding="utf8" remarks="职位id" >
+                <constraints  nullable="false" />
+            </column>
+            <column name="sid" type="integer(30)" encoding="utf8" remarks="学生id" >
+                <constraints  nullable="false" />
+            </column>
+            <column name="sepcState" type="integer(2)" encoding="utf8" remarks="招聘状态">
+                <constraints  nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200229-02" author="ysl">
+        <insert tableName="role">
+            <column name="rid"  valueNumeric="1" encoding="utf8"></column>
+            <column name="roleType" value="学生" encoding="utf8" type="varchar(10)"></column>
+        </insert>
+        <insert tableName="role">
+            <column name="rid"  valueNumeric="2" encoding="utf8"></column>
+            <column name="roleType" value="企业" encoding="utf8" type="varchar(10)"></column>
+        </insert>
+        <insert tableName="role">
+            <column name="rid" valueNumeric="3" encoding="utf8"></column>
+            <column name="roleType" value="学校" encoding="utf8" type="varchar(10)"></column>
+        </insert>
+        <insert tableName="role">
+            <column name="rid" valueNumeric="4" encoding="utf8"></column>
+            <column name="roleType" value="管理员" encoding="utf8" type="varchar(10)"></column>
+        </insert>
+        <insert tableName="user">
+            <column name="uAccount" value="haiping12138" encoding="utf8"></column>
+            <column name="uPassword" value="haiping12138" encoding="utf8"></column>
+            <column name="uPhone" value="110" encoding="utf8"></column>
+            <column name="uEmail" value="120" encoding="utf8"></column>
+            <column name="uPhoto" value="http://39.96.68.53:70/auto.jpg" encoding="utf8"></column>
+        </insert>
+        <insert tableName="manager">
+            <column name="mName" value="海聘" encoding="utf8"></column>
+            <column name="mAddress" value="海聘有限公司" encoding="utf8"></column>
+        </insert>
+        <insert tableName="ur">
+            <column name="uid" valueNumeric="1" encoding="utf8"></column>
+            <column name="rid" valueNumeric="4" encoding="utf8"></column>
+            <column name="id" valueNumeric="1" encoding="utf8"></column>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

@@ -1,0 +1,142 @@
+.line{
+    margin-top: 20px;
+}
+#imgName{
+    line-height: 130px;
+}
+.line  input{
+    width: 100%;
+    font-size: 15px;
+    margin-bottom: 10px;
+    height: 40px;
+    border: 1px solid #999;
+    border-radius: 5px;
+}
+.line>div{
+    font-size: 15px;
+    text-align: right;
+    line-height: 40px;
+}
+.line>div:nth-child(1){
+    color: #9d9d9d;
+}
+.mid{
+    padding-left: 120px;
+    padding-right: 120px;
+}
+.mid div{
+    padding: 0;
+}
+.img>img{
+    width: 60%;
+    margin-left: 150px;
+    margin-top: 30px;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(250, 250, 250, 0.5)));
+}
+.headLine{
+    color: #ff6644;
+    font-size: 30px;
+    margin-bottom: 25px;
+    margin-top: 50px;
+}
+.Line{
+    color: #ff6644;
+    font-size: 20px;
+    margin-bottom: 25px;
+    margin-left: 30px;
+}
+
+.must{
+    color: red;
+    text-align: left;
+    padding-left: 10px;
+}
+.line select{
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+}
+.active{
+    display: block;
+}
+#teacherName{
+    display: none;
+}
+#studentID{
+    display: none;
+}
+#enterpriseName{
+     display: none;
+ }
+.buttom{
+    width: 100%;
+    background-color: #ff6644;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 40px;
+}
+.upImg:hover{
+    background-color: #ff6644;
+    color: white;
+    cursor: pointer;
+}
+#imgCard{
+    width: 100%;
+    border: 1px dashed  #9d9d9d;
+    padding: 10px;
+    width: 500px;
+    border-radius: 10px;
+}
+.headimg{
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 25px;
+    margin-left: 35px;
+}
+.headimg img{
+    width: 100%;
+}
+.upImg{
+    width: 100%;
+    height: 40px;
+    color: #ff6644;
+    background-color:white;
+    border: 1px solid #ff6644;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 45px;
+    cursor: pointer;
+}
+.upImg input{
+    opacity:0;
+    z-index: 999;
+    position:absolute;
+    margin-top: 45px;
+    top:0;
+    left:0;
+    cursor: pointer;
+}
+#checkEmail{
+    width: 90%;
+    display: none;
+    float: right;
+}
+.sendButtom{
+    width: 90%;
+    background-color: #ff6644;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+}
+

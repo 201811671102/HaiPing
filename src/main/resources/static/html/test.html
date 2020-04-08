@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var lession = [
+        {
+            name:'iphone3',
+            price:'1888'
+        },
+        {
+            name:'iphoneX',
+            price:'8888'
+        },
+        {
+            name:'iphone4',
+            price:'3888'
+        },
+        {
+            name:'iphone5',
+            price:'4888'
+        },
+        {
+            name:'iphone6',
+            price:'5888'
+        },
+        {
+            name:'iphone7',
+            price:'6888'
+        },
+        {
+            name:'iphone8',
+            price:'7888'
+        }
+    ];
+    // function order(field){
+    //     console.log(order.arguments);
+    //     return function price(a,b) {
+    //         console.log(price.arguments);
+    //         return a[field] > b[field] ? 1 :-1
+    //     }
+    // }
+    // let hd = lession.sort(order('price'));
+    // console.table(hd)
+
+    var provice = [
+        {
+            name: "北京市",
+            city: [
+                {
+                    name: "北京市",
+                    districtAndCounty: ["东城区", "西城区", "崇文区", "宣武区", "朝阳区", "丰台区", "石景山区", "海淀区", "门头沟区", "房山区", "通州区", "顺义区", "昌平区", "大兴区", "怀柔区", "平谷区", "密云县", "延庆县", "延庆镇"]
+                }
+            ]
+        },
+        {
+            name: "天津市",
+            city: [
+                {
+                    name: "天津市",
+                    districtAndCounty: ["和平区", "河东区", "河西区", "南开区", "河北区", "红桥区", "塘沽区", "汉沽区", "大港区", "东丽区", "西青区", "津南区", "北辰区", "武清区", "宝坻区", "蓟县", "宁河县", "芦台镇", "静海县", "静海镇"]
+                }
+            ]
+        }]
+    provice.forEach(function (item) {
+        console.table(item.city[0].districtAndCounty)
+    })
+    // function f(a) {
+    //     let a = f.arguments[0]
+    //     function f1() {
+    //         console.log(a)
+    //     }
+    //     f1()
+    // }
+    // f(2)
+</script>
+</html>

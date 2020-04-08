@@ -1,0 +1,638 @@
+/*全局样式，应该到所有共有部分（如登录、注册、页头、页尾），谨慎修改*/
+@charset "utf-8";
+html, body, h1, h2, h3, h4, h5, h6, hr, p, iframe, dl, dt, dd, ul, ol, li, pre, form, fieldset, button, input, textarea, th, td {
+	margin:0;
+	padding:0
+}
+body, button, input, select, textarea, fieldset, label {
+	font:14px/1.5 arial, "Microsoft Yahei", "Hiragino Sans GB", sans-serif;
+}
+ul, ol, li {
+	list-style:none;
+	list-style-type:none;
+}
+fieldset, img {
+	border:0 none
+}
+img {
+	-ms-interpolation-mode:bicubic
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0
+}
+div, dl, dt, dd, ul, ol, li, a {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+input, select, textarea, button {
+	font-size:100%;
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	box-sizing:content-box;
+	vertical-align:middle;
+}
+button, input[type=button], input[type=submit] {
+	cursor:pointer
+}
+input[type=search] {
+	-webkit-appearance:textfield
+}
+textarea {
+	overflow-y:auto;
+	resize:vertical
+}
+h1 {
+	font-size:36px;
+}
+h2 {
+	font-size:28px;
+}
+h3 {
+	font-size:24px;
+}
+h4 {
+	font-size:22px;
+}
+h5 {
+	font-size:18px;
+}
+h6 {
+	font-size:16px;
+}
+h1, h2, h3, h4, h5, h6 {
+	color:#333333;
+	line-height:1.8em;
+	letter-spacing:0.1em;
+}
+a {
+	color:#333;
+	text-decoration:none;
+}
+a:hover {
+	color:#000;
+}
+/*输入框获取到焦点时*/
+input:focus {
+	box-shadow: 0px 0px 10px #8dc437;
+}
+/*输入框报错时*/
+		.reg_error {/*边框提示*/
+	border:1px solid #f2766a !important;
+}
+.reg_txt .reg_err {/*文字提示 在html 的类中加reg_err*/
+	display: none; 
+		}
+/*输入框报错时*/
+.floatl {
+	float: left
+}
+.floatr {
+	float:right
+}
+.clearb {
+	clear:both
+}
+/*注册登录样式*/
+.mask-Bg {
+	background:#000;
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	z-index:9999;
+	display:none;
+	opacity: 0.5;
+}
+.layer-LogReg {
+	visibility: hidden;
+	top: 50%;
+	left: 50%;
+	position:absolute;
+	z-index:10000;
+	height:592px;
+	width:612px;
+	margin:-290px 0 0 -290px;
+	background:#fff;
+	padding:10px;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+	border-radius: 12px;
+}
+.close {
+	font-size: 40px;
+	line-height: .5;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	color: #aaa;
+	text-shadow: 0 -1px 1px rbga(0, 0, 0, .6);
+	cursor: pointer;
+}
+/*登录样式开始*/
+	.container {
+	width: 60%;
+	margin:2% 20%;
+	color:#333;
+}
+.layer-LogReg h5 {
+	text-align:center;
+	font-size:24px;
+	color: #333;
+}
+.loginH5 {
+	padding-top:100px !important;
+	padding-bottom: 24px;
+}
+.xuanze {
+	margin-top:10px;
+	border-radius: 4px;
+}
+.xuanze a {
+	color: #f2766a;
+}
+.xuanze a:hover {
+	color: #f79b92;
+}
+.loginbutton {
+ margin-top:10px;
+
+}
+.loginbutton a {
+	padding:10px;
+	display:block;
+    color:#fff;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 4px;
+	background-color: #f2766a;
+}
+.loginbutton a:hover {
+	background-color: #e05447;
+}
+.gologin {
+	text-align: center;
+	padding-top: 10px;
+}
+.gologin a {
+	font-size: 16px;
+	color:#f2766a;
+	padding-right: 20px;
+	background-image: url(../images/jiantou.png);
+	background-repeat: no-repeat;
+	background-position: 100% 50%;
+}
+.reg_txt .reg_pw p {
+	padding-left:18px;
+	font-size:12px;
+	margin-top:5px;
+	color:#F2766A;
+	background-image: url(../images/warning.png);
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+}
+.autologin>span {
+	display: block;
+	padding-left: 24px;
+	line-height: 24px;
+	background-image: url(../images/select111.png);
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	cursor: pointer;
+}/*登录样式结束*/
+/*注册样式开始*/
+	.waybtn {
+	display: inline-table;
+	width: 100%;
+	margin-top:16px;
+}
+.waybtn li {
+	float: left;
+	display: inline-block;
+	width: 50%;
+	height: 38px;
+	font-size: 14px;
+	line-height:36px;
+	color: #666;
+	text-align: center;
+	background-color: #f5f5f5;
+	cursor: pointer;
+}
+/*选中样式*/
+	.waybtn .activeway {
+	height: 46px;
+	background-color: #fff;
+	background-image: url(../images/waybj.png);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	color: #fff;
+}
+/*显示表单*/
+	.myForm1 {
+	display:block;
+}
+/*影藏表单*/
+	.myForm0 {
+	display:none;
+}
+/*注册方式*/
+	#zhucefangshi {
+	width: 100%;
+}
+/*注册方式的未选中样式*/
+	#zhucefangshi dd {
+	float: left;
+	width: 50%;
+	padding: 10px 0;
+	padding-left: 26px;
+	background-repeat: no-repeat;
+	background-position: 0 0px;
+	cursor: pointer;
+}
+#zhucefangshi dd:last-child {
+	background-image: url(../images/EmailBJ.jpg);
+}
+#zhucefangshi dd:first-child {
+	background-image: url(../images/phonoBJ.jpg);
+}
+/*注册方式的选中样式*/
+	.activefang {
+	color:#ff3333;
+	border-bottom:1px solid #ff3333;
+	background-position: 0 -40px !important;
+}
+/*注册密码*/
+.reg_txt {
+	position:relative;
+	border:1px solid #e5e5e5;
+	zoom:1;
+	height:43px;
+	width:100%;
+	margin-bottom:24px;
+	border-radius:4px;
+	vertical-align:baseline;
+	display:inline-block;
+*display:inline;
+	z-index:2
+}
+.reg_txt input {
+	height:39px;
+	border:0;
+	padding-top:2px;
+	text-indent:10px;
+	line-height:28px;
+	width:100%;
+	border-radius:3px;
+	color:#444;
+	background:#fff;
+}
+.password_box {
+	position: absolute;
+	color:#949494;
+	right: 11px;
+	top: 10px;
+	font-size:12px;
+	line-height:12px;
+}
+.password_box i {
+	background: #c5c5c5;
+	overflow: hidden;
+	display: inline-block;
+	width: 14px;
+	height: 4px;
+	margin-right: 3px;
+	margin-top: 3px;
+}
+.getcode {
+	display: inline-block;
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	font-size:12px;
+	width: 24%;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 4px;
+	color: #fff;
+	background-color: #ccc;
+}
+.getcode a{
+	display:block;
+	background:#f2766a;
+	border-radius: 4px;
+	color: #fff;
+}
+.getcode a:hover {
+	background:#e05447;
+}
+.yzm {
+	position: absolute;
+	top: 5px;
+	right:40px;
+}
+img.yzm {
+	width:80px;
+	height:30px;
+}
+.refreshYzm {
+	display: inline-block;
+	position: absolute;
+	top: 9px;
+	right: 9px;
+	width: 22px;
+	height:22px;
+	background-image: url(../images/refresh.jpg);
+	background-repeat: no-repeat;
+	background-position: 100% 50%;
+	cursor: pointer;
+}
+/*用户协议*/
+	.protocol {
+	margin-top:5px;
+}
+.protocol strong {
+	color:#f79b92;
+}
+/*箭头样式*/
+	.close-layer {
+}
+/*页头页尾*/
+/*全站前台页头*/
+.head-all-box {
+	width:100%;
+	height:33px;
+	font-size:12px;
+	background:#fff;
+	border-bottom:#ccc 1px dotted;
+ 	box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+ }
+.head-all-contents {
+	width:1190px;
+	height:32px;
+	overflow:hidden;
+	background:#fff;
+	margin:0 auto;
+}
+.head-all-contents .nav-l {
+	float:left;
+	width:30%;
+}
+.head-all-contents .nav-l li {
+	float:left;
+}
+.head-all-contents .nav-r {
+	width:50%;
+	float:right;
+	text-align:right;
+}
+.head-all-contents .nav-r li{
+	float:right;
+	color:#333;
+	line-height:32px;
+	display:block;
+	text-align:left;
+	border-left:#eee 1px dotted;
+}
+.head-all-contents .nav-l a {
+	padding:0 15px;
+	line-height:32px;
+	display:block;
+ }
+.head-all-contents .nav-r a {
+	padding:0 15px;
+	line-height:32px;
+	display:block;
+ }
+ .head-all-contents .nav-r a:hover,.head-all-contents .nav-l a:hover {
+	 color:#e05447;
+ }
+.head-all-contents .nav-r li.menu {
+	padding:0 20px 0 15px;
+	cursor:pointer;
+	background:url(../images/ico-jj1.png) no-repeat 120px 14px;
+}
+.head-all-contents .nav-r li.menu:hover {
+	color:#e05447;
+	background:#fff url(../images/ico-jj1.png) no-repeat 120px -28px;
+}
+.head-all-contents .nav-r li.menu img {
+	width:20px;
+	height:20px;
+	display:block;
+	float:left;
+	margin:6px 5px 0 0;
+}
+.head-all-contents .nav-r li.menu .name  {
+	width:80px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow:hidden;
+	display:block;
+	float:left;
+}
+.head-all-contents .nav-r li.menu .sub-menu {
+	width:140px;
+	background:#fff;
+	position:absolute;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+	display:none;
+	margin:32px 0 0 -15px;
+}
+.head-all-contents .nav-r li.menu .sub-menu a {
+	line-height:30px;
+	width:100%;
+	color:#333;
+	border-top:#f1f1f1 1px dotted;
+}
+.head-all-contents .nav-r li.menu .sub-menu a:hover {
+	background:#f7f7f7;
+	color:#e05447;
+}
+.head-all-contents .nav-r li.menu:hover .sub-menu {
+	display:block;
+}
+
+.head-all-contents .nav-l li.home a {
+	background:url(../images/ico-ht.png) no-repeat 10px -26px;
+	text-indent:10px;
+}
+.head-all-contents .nav-l li.app a {
+	background:url(../images/ico-ht.png) no-repeat 10px 11px;
+	text-indent:10px;
+}
+
+.head-all-contents .nav-r li .new {
+	background:#e05447;
+	width:16px;
+	height:16px;
+	font-size:10px !important;
+	font-weight:bold;
+	text-align:center;
+	line-height:16px;
+	border-radius: 50%;
+	margin:9px 0 0 52px;
+	position:absolute;
+	color:#fff;
+ }
+ .head-all-contents .nav-r li.sms a {
+	 padding-right:30px;
+ }
+/*用户中心页头*/
+.head-user-box {
+	width:100%;
+	height:48px;
+	background:#2d2e30;
+}
+.head-user-contents {
+	width:1190px;
+	height:48px;
+	overflow:hidden;
+	background:#2d2e30;
+	margin:0 auto;
+}
+.head-user-contents .logo {
+	width:220px;
+	height:48px;
+	line-height:50px;
+	font-weight:bold;
+	overflow:hidden;
+	color:#828282;
+	text-indent:96px;
+	font-size:16px;
+	background:url(../images/logo-user.png) no-repeat 5px center;
+	float:left;
+}
+.head-user-contents .nav {
+	width:560px;
+	height:48px;
+	float:left;
+}
+.head-user-contents .nav ul {
+	padding:10px 0 0 0;
+}
+.head-user-contents .nav li {
+	float:left;
+}
+.head-user-contents .nav li a {
+	padding:0 30px;
+	line-height:38px;
+	display:block;
+	color:#ccc;
+}
+.head-user-contents .nav li.sele {
+	background:#f1f1f1;
+	border-radius:5px 5px 0px 0px
+}
+.head-user-contents .nav li.sele a, .head-user-contents .nav li a:hover {
+	color:#e05447;
+	font-weight:bold;
+}
+.head-user-contents .subnav {
+	width:400px;
+	float:right;
+	font-size:12px;
+}
+.head-user-contents .subnav li{
+	float:right;
+	height:48px;
+	line-height:48px;
+	color:#999;
+	border-left:#333436 1px solid;
+}
+.head-user-contents .subnav li:hover {
+	background:#333436;
+}
+.head-user-contents .subnav li a {
+	padding:0 15px;
+	display:block;
+	float:left;
+	color:#999;
+}
+.head-user-contents .subnav li a:hover {
+	color:#ccc;
+}
+.head-user-contents .subnav li.menu {
+	padding:0 20px 0 15px;
+	cursor:pointer;
+	background:url(../images/ico-jj1.png) no-repeat 120px 21px;
+}
+.head-user-contents .subnav li.menu:hover {
+	background:#333436 url(../images/ico-jj1.png) no-repeat 120px -21px;
+}
+.head-user-contents .subnav li.menu img {
+	width:20px;
+	height:20px;
+	display:block;
+	float:left;
+	margin:15px 5px 0 0;
+}
+.head-user-contents .subnav li.menu .name {
+	width:80px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow:hidden;
+	display:block;
+	float:left;
+}
+.head-user-contents .subnav li.menu .sub-menu {
+	width:140px;
+	background:#333436;
+	position:absolute;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
+	display:none;
+	margin:48px 0 0 -15px;
+}
+.head-user-contents .subnav li.menu .sub-menu a {
+	line-height:30px;
+	width:100%;
+	border-top:#444 1px dotted;
+}
+.head-user-contents .subnav li.menu .sub-menu a:hover {
+	background:#2d2e30;
+}
+.head-user-contents .subnav li.menu:hover .sub-menu{
+	display:block;
+}
+.head-user-contents .subnav li.home a {
+	background:url(../images/ico-ht.png) no-repeat 10px -18px;
+	text-indent:10px;
+}
+.head-user-contents .subnav li.app a {
+	background:url(../images/ico-ht.png) no-repeat 10px 19px;
+	text-indent:10px;
+}
+/*用户中心页头 end*/
+/*页尾*/
+.foot-box {
+	width:100%;
+	background:#2d2e30;
+	margin-top:20px;
+}
+.foot-contents {
+	width:1190px;
+	background:#2d2e30;
+	margin:0 auto;
+	padding:25px 0 15px 0;
+	overflow:hidden;
+	color:#999;
+}
+.foot-contents .nav {
+	width:50%;
+	float:left;
+}
+.foot-contents .nav a {
+	color:#ccc;
+	padding:0 5px;
+}
+.foot-contents .nav p {
+	padding:5px 0 0 5px;
+	font-size:12px;
+}
+.foot-contents .text {
+	width:48%;
+	float:right;
+	text-align:right;
+	padding:5px 5px 0 0;
+	font-size:12px;
+}

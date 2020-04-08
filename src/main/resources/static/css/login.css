@@ -1,0 +1,60 @@
+
+
+
+.backgroundImg{
+    width: 100%;
+}
+.mid{
+    margin-right: 0;
+    margin-left: 0;
+}
+.login{
+    background-color: white;
+    padding: 60px;
+}
+.login input{
+    width: 100%;
+    border: 0px;
+    outline:none;
+    background-color: transparent;
+    font-size: 20px;
+    color: #999999;
+    margin-bottom: 10px;
+}
+.line{
+    border-bottom: 2px solid #d5d8d8;
+    margin-top: 20px;
+}
+.midRight{
+    padding: 0;
+    margin-top: 60px;
+}
+.buttom{
+    background-color: #ff6644;
+    height: 45px;
+    line-height: 45px;
+    color: white;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.server{
+    color: #999999;
+    font-size: 15px;
+    padding: 0;
+    margin-top: 35px;
+}
+.headLine{
+    color: #ff6644;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+.students{
+    color: #999999;
+    font-size: 15px;
+    padding: 0;
+    margin-top: 35px;
+    text-align: right;
+}
+

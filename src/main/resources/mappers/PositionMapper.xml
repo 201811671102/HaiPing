@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pre.ysl.mapper.PositionMapper">
+  <resultMap id="BaseResultMap" type="pre.ysl.pojo.Position">
+    <constructor>
+      <idArg column="pid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="pName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pType" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pDescribe" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pRequirements" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pCompensation" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="pWelfare" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pAddress" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pid, pName, pType, pDescribe, pRequirements, pCompensation, pWelfare, pAddress, update_time
+  </sql>
+  <select id="selectByExample" parameterType="pre.ysl.pojo.PositionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from position
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from position
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from position
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pre.ysl.pojo.PositionExample">
+    delete from position
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pre.ysl.pojo.Position">
+    <selectKey keyProperty="pid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into position (pName, pType, pDescribe, 
+      pRequirements, pCompensation, pWelfare, 
+      pAddress, update_time)
+    values (#{pname,jdbcType=VARCHAR}, #{ptype,jdbcType=VARCHAR}, #{pdescribe,jdbcType=VARCHAR}, 
+      #{prequirements,jdbcType=VARCHAR}, #{pcompensation,jdbcType=INTEGER}, #{pwelfare,jdbcType=VARCHAR}, 
+      #{paddress,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="pre.ysl.pojo.Position">
+    <selectKey keyProperty="pid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pname != null">
+        pName,
+      </if>
+      <if test="ptype != null">
+        pType,
+      </if>
+      <if test="pdescribe != null">
+        pDescribe,
+      </if>
+      <if test="prequirements != null">
+        pRequirements,
+      </if>
+      <if test="pcompensation != null">
+        pCompensation,
+      </if>
+      <if test="pwelfare != null">
+        pWelfare,
+      </if>
+      <if test="paddress != null">
+        pAddress,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null">
+        #{ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="pdescribe != null">
+        #{pdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="prequirements != null">
+        #{prequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="pcompensation != null">
+        #{pcompensation,jdbcType=INTEGER},
+      </if>
+      <if test="pwelfare != null">
+        #{pwelfare,jdbcType=VARCHAR},
+      </if>
+      <if test="paddress != null">
+        #{paddress,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pre.ysl.pojo.PositionExample" resultType="java.lang.Long">
+    select count(*) from position
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update position
+    <set>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pname != null">
+        pName = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptype != null">
+        pType = #{record.ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdescribe != null">
+        pDescribe = #{record.pdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prequirements != null">
+        pRequirements = #{record.prequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcompensation != null">
+        pCompensation = #{record.pcompensation,jdbcType=INTEGER},
+      </if>
+      <if test="record.pwelfare != null">
+        pWelfare = #{record.pwelfare,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paddress != null">
+        pAddress = #{record.paddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update position
+    set pid = #{record.pid,jdbcType=INTEGER},
+      pName = #{record.pname,jdbcType=VARCHAR},
+      pType = #{record.ptype,jdbcType=VARCHAR},
+      pDescribe = #{record.pdescribe,jdbcType=VARCHAR},
+      pRequirements = #{record.prequirements,jdbcType=VARCHAR},
+      pCompensation = #{record.pcompensation,jdbcType=INTEGER},
+      pWelfare = #{record.pwelfare,jdbcType=VARCHAR},
+      pAddress = #{record.paddress,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pre.ysl.pojo.Position">
+    update position
+    <set>
+      <if test="pname != null">
+        pName = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null">
+        pType = #{ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="pdescribe != null">
+        pDescribe = #{pdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="prequirements != null">
+        pRequirements = #{prequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="pcompensation != null">
+        pCompensation = #{pcompensation,jdbcType=INTEGER},
+      </if>
+      <if test="pwelfare != null">
+        pWelfare = #{pwelfare,jdbcType=VARCHAR},
+      </if>
+      <if test="paddress != null">
+        pAddress = #{paddress,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pre.ysl.pojo.Position">
+    update position
+    set pName = #{pname,jdbcType=VARCHAR},
+      pType = #{ptype,jdbcType=VARCHAR},
+      pDescribe = #{pdescribe,jdbcType=VARCHAR},
+      pRequirements = #{prequirements,jdbcType=VARCHAR},
+      pCompensation = #{pcompensation,jdbcType=INTEGER},
+      pWelfare = #{pwelfare,jdbcType=VARCHAR},
+      pAddress = #{paddress,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="pre.ysl.pojo.PositionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from position
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
