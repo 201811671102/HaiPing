@@ -72,28 +72,20 @@ public class UserController {
         try {
             Subject subject = SecurityUtils.getSubject();
             //查询是否封号
-            if(redisUtil.hasKey(uaccount+"sealed")){
-                if (redisUtil.getExpire(uaccount+"sealed") > 0){
-                    long time = redisUtil.getExpire(uaccount+"sealed");
+            if(redisUtil.hasKey("haiping"+uaccount+"sealed")){
+                if (redisUtil.getExpire("haiping"+uaccount+"sealed") > 0){
+                    long time = redisUtil.getExpire("haiping"+uaccount+"sealed");
                     Date date = new Date(new Date().getTime()+time*1000);
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
                     return new ResultUtil().Error("401","账号查封致"+simpleDateFormat.format(date));
                 }else{
-                    redisUtil.del(uaccount+"sealed");
+                    redisUtil.del("haiping"+uaccount+"sealed");
                 }
             }
             //shiro
             UsernamePasswordToken token = new UsernamePasswordToken(uaccount,upassword);
             subject.login(token);
             User user = (User) subject.getPrincipal();
-            int port = request.getRemotePort();
-            //重复登录问题
-          /*  if (redisUtil.hasKey(uaccount+"port") && redisUtil.get(uaccount+"port").equals(port)){
-                redisUtil.del(uaccount+"port");
-                WebSocketServer.sendMessage("账户在别的浏览器登录",1,user.getUid());
-            }else{
-                redisUtil.set(uaccount+"port",port);
-            }*/
             UR ur = urService.selectByUid(user.getUid());
             UserDTO userDTO = new UserDTO(user);
             userDTO.setRole(ur.getRid());
@@ -126,16 +118,23 @@ public class UserController {
 
     @PutMapping("/userChangePassword")
     @ResponseBody
-    @ApiOperation(value = "用户修改密码",notes = "500报错")
+    @ApiOperation(value = "用户修改密码",notes = "500报错 404 无效账户 400 密码错误")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "uaccount", value = "用户账户", required = true, dataType = "String"),
             @ApiImplicitParam(paramType = "query", name = "upassword", value = "用户密码", required = true, dataType = "String"),
             @ApiImplicitParam(paramType = "query", name = "unewpassword", value = "用户新密码", required = true, dataType = "String")
     })
-    public ResultDTO userChangePassword(String uaccount, String upassword,String unewpassword){
+    public ResultDTO userChangePassword(String uaccount,String upassword,String unewpassword){
         try {
-            userService.updateUserPassowrd(uaccount,unewpassword);
-            return new ResultUtil().Success();
+            User user = userService.selectByAccount(uaccount);
+            if (user == null){
+                return new ResultUtil().Error("404","无效账户");
+            }else if (!user.getUpassword().equals(upassword)){
+                return new ResultUtil().Error("400","账户密码错误");
+            }else{
+                userService.updateUserPassowrd(uaccount, unewpassword);
+                return new ResultUtil().Success();
+            }
         }catch (Exception e){
             log.info(e.toString());
             return new ResultUtil().Error("500",e.toString());
@@ -192,13 +191,13 @@ public class UserController {
                return new ResultUtil().Error("400","邮箱错误");
            }
            //验证码时长90秒
-           if (redisUtil.hasKey(email)){
-               if (redisUtil.getExpire(email) > 0){
+           if (redisUtil.hasKey("haiping"+email)){
+               if (redisUtil.getExpire("haiping"+email) > 0){
                    //多次提交
                    return new ResultUtil().Error("401","已经发送验证码到邮箱"+email);
                }
                //删除没有使用的过期验证码
-               redisUtil.del(email);
+               redisUtil.del("haiping"+email);
            }
            return SendCode(email,4);
        }catch (Exception e){
@@ -218,9 +217,9 @@ public class UserController {
     })
     public ResultDTO userFindPassword(String uemail,@RequestParam String uaccount,String upassword,String code){
         try {
-            if (redisUtil.hasKey(uemail)){
-                if (redisUtil.get(uemail).equals(code)){
-                    redisUtil.del(uemail);
+            if (redisUtil.hasKey("haiping"+uemail)){
+                if (redisUtil.get("haiping"+uemail).equals(code)){
+                    redisUtil.del("haiping"+uemail);
                     userService.updateUserPassowrd(uaccount,upassword);
                     return new ResultUtil().Success();
                 }
@@ -279,8 +278,8 @@ public class UserController {
             @ApiParam(value = "用户类型",required = true)@RequestParam(value = "rid",required = true) Integer rid){
         try {
             User user = new User();
-            if (redisUtil.hasKey(uemail)){
-                if (redisUtil.get(uemail).equals(code)){
+            if (redisUtil.hasKey("haiping"+uemail)){
+                if (redisUtil.get("haiping"+uemail).equals(code)){
                     user.setUaccount(uaccount);
                     user.setUpassword(upassword);
                     user.setUemail(uemail);
@@ -304,7 +303,7 @@ public class UserController {
                     ur.setUid(user.getUid());
                     ur.setRid(rid);
                     ur.setId(0);
-                    redisUtil.set(uaccount,user);
+                    redisUtil.set("haiping"+uaccount,user);
                     urService.insertNewUR(ur);
                     return new ResultUtil().Success(user);
                 }
@@ -329,11 +328,11 @@ public class UserController {
             var+=Math.round(Math.random()*9)+"";
         }
         mailBase.setContent("您的验证为:"+var+"\n"+"此验证码将于90秒后失效");
-        if (redisUtil.hasKey(uemail)){
-            redisUtil.del(uemail);
+        if (redisUtil.hasKey("haiping"+uemail)){
+            redisUtil.del("haiping"+uemail);
         }
-        redisUtil.set(uemail,var);
-        redisUtil.expire(uemail,90);
+        redisUtil.set("haiping"+uemail,var);
+        redisUtil.expire("haiping"+uemail,90);
         return sendMail.sendSimpleMail(mailBase);
     }
 

@@ -1,7 +1,7 @@
 $("#change").click(function () {
-    if ($('input').val() == ''){
+    if($('input').val() == ''){
         PromptBox.displayPromptBox('请填写完整。')
-    } else {
+    }else{
         let data = new FormData()
         data.append('uaccount',$("#uaccount").val())
         data.append('upassword',$("#upassword").val())
@@ -21,14 +21,20 @@ $("#change").click(function () {
             contentType:false,
             processData:false,
             success:function(res){
-                console.log(res)
-                $.removeCookie('user')
-                $.removeCookie('auth')
-                PromptBox.displayPromptBox('密码修改成功')
-                setTimeout(function () {
-                    $(location).attr('href','../html/login.html')
-                },2000)
-
+                if (res.code == 400) {
+                    PromptBox.displayPromptBox('密码错误')
+                }
+                if (res.code == 404) {
+                    PromptBox.displayPromptBox('用户不存在')
+                }
+                if (res.code == 200) {
+                    $.removeCookie('user')
+                    $.removeCookie('auth')
+                    PromptBox.displayPromptBox('密码修改成功')
+                    setTimeout(function () {
+                        $(location).attr('href', '../html/login.html')
+                    }, 2000)
+                }
             }
         })
     }

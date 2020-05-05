@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
         UserExample userExample = new UserExample();
         userExample.createCriteria().andUaccountEqualTo(account);
         try {
-            if (redisUtil.hasKey(account)){
-                return (User) redisUtil.get(account);
+            if (redisUtil.hasKey("haiping"+account)){
+                return (User) redisUtil.get("haiping"+account);
             }
             List<User> userList =  userMapper.selectByExample(userExample);
             if (userList.size()>1){
@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
             }else if (userList.size() == 0){
                 return null;
             }
+            redisUtil.set("haiping"+account,userList.get(0));
             return userList.get(0);
         }catch (NullPointerException e){
                 return null;
@@ -84,7 +85,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insertNewUser(User user) {
         try{
-            redisUtil.set(user.getUaccount(),user);
+            redisUtil.set("haiping"+user.getUaccount(),user);
             return userMapper.insertSelective(user);
         }catch (Exception e){
             throw e;
@@ -95,16 +96,16 @@ public class UserServiceImpl implements UserService {
     public int updateUserPassowrd(String uaccount, String unewpassword) {
         UserExample userExample = new UserExample();
         userExample.createCriteria().andUaccountEqualTo(uaccount);
-        User user = new User();
+        User user = selectByAccount(uaccount);
         user.setUpassword(unewpassword);
         try {
-            return userMapper.updateByExampleSelective(user,userExample);
+            return userMapper.updateByPrimaryKeySelective(user);
         }catch (Exception e){
             throw e;
         }finally {
-            user = selectByAccount(uaccount);
-            redisUtil.del(uaccount);
-            redisUtil.set(uaccount,user);
+            user = this.selectByUid(user.getUid());
+            redisUtil.del("haiping"+uaccount);
+            redisUtil.set("haiping"+uaccount,user);
         }
     }
 
@@ -123,8 +124,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUserByUid(User user) {
         try{
-            redisUtil.del(user.getUaccount());
-            redisUtil.set(user.getUaccount(),user);
+            redisUtil.del("haiping"+user.getUaccount());
+            redisUtil.set("haiping"+user.getUaccount(),user);
             return userMapper.updateByPrimaryKeySelective(user);
         }catch (Exception e){
             throw e;
@@ -151,7 +152,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteUser(Integer uid,String uaccount) {
         try{
-            redisUtil.del(uaccount);
+            redisUtil.del("haiping"+uaccount);
             return userMapper.deleteByPrimaryKey(uid);
         }catch (Exception e){
             throw e;

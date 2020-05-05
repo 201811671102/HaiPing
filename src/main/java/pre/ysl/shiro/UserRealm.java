@@ -48,8 +48,8 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
         User user = new User();
         try {
-            if (redisUtil.hasKey(token.getUsername())){
-                user = (User) redisUtil.get(token.getUsername());
+            if (redisUtil.hasKey("haiping"+token.getUsername())){
+                user = (User) redisUtil.get("haiping"+token.getUsername());
             }else{
                 user = userService.selectByAccount(token.getUsername());
             }

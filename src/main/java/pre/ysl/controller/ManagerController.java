@@ -75,8 +75,8 @@ public class ManagerController {
             @ApiParam(value = "管理员姓名",required = true)@RequestParam(value = "mname",required = true)String mname,
             @ApiParam(value = "管理员地址",required = true)@RequestParam(value = "maddress",required = true)String maddress){
         try {
-            if (redisUtil.hasKey(uemail)){
-                if (redisUtil.get(uemail).equals(code)){
+            if (redisUtil.hasKey("haiping"+uemail)){
+                if (redisUtil.get("haiping"+uemail).equals(code)){
                     if (managerService.selectByNameAndAdress(mname,maddress) != null){
                         return new ResultUtil().Error("201","名字和地址皆重复");
                     }
@@ -100,7 +100,7 @@ public class ManagerController {
                         ftpOperation.closeConnect();
                     }
                     userService.insertNewUser(user);
-                    redisUtil.set(uaccount,user);
+                    redisUtil.set("haiping"+uaccount,user);
                     Manager manager = new Manager();
                     manager.setMaddress(maddress);
                     manager.setMname(mname);
@@ -216,8 +216,8 @@ public class ManagerController {
             @ApiParam(value = "封号秒数",required = true)@RequestParam(value = "sealed",required = true)long sealed){
         try {
             //查询是否被查封过，有就增加封号时长
-            if (redisUtil.hasKey(uaccount+"sealed") && redisUtil.getExpire(uaccount+"sealed") > 0){
-                sealed += redisUtil.getExpire(uaccount);
+            if (redisUtil.hasKey("haiping"+uaccount+"sealed") && redisUtil.getExpire("haiping"+uaccount+"sealed") > 0){
+                sealed += redisUtil.getExpire("haiping"+uaccount+"sealed");
             }
             //计算解封日期
             Date date = new Date(new Date().getTime()+sealed*1000);
@@ -228,7 +228,7 @@ public class ManagerController {
             mailBase.setContent("账号:"+uaccount+"\n"+"查封原因:"+message+"\n"+"解封时间:"+simpleDateFormat.format(date));
             mailBase.setRecipient(uemail);
             //redis存储封号信息
-            redisUtil.set(uaccount+"sealed","sealed",sealed);
+            redisUtil.set("haiping"+uaccount+"sealed","sealed",sealed);
             return sendMail.sendSimpleMail(mailBase);
         }catch (Exception e){
             log.info(e.toString());
