@@ -1,5 +1,5 @@
 $(".buttom").click(function () {
-    if($('input').val() == ''){
+    if($("#account").val() == '' || $("#password").val() == ''){
         PromptBox.displayPromptBox('请填写完整。')
     }else{
         let data = {
