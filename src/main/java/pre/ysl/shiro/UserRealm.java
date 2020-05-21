@@ -52,6 +52,7 @@ public class UserRealm extends AuthorizingRealm {
                 user = (User) redisUtil.get("haiping"+token.getUsername());
             }else{
                 user = userService.selectByAccount(token.getUsername());
+                redisUtil.set("haiping"+token.getUsername(),user);
             }
             if (user==null){
                 return null;

@@ -141,7 +141,9 @@ function getResume(obj) {
                     '                </tr>\n' +
                     '                <tr>\n' +
                     '                    <td>简历：</td>\n' +
-                    '                    <td>点击打开</td>\n' +
+                    '                    <input type="hidden" value="'+res.data[key].roleObject.sid+'"/>'+
+                    '                    <td onclick="downResume(this)">点击下载</td>\n' +
+                    '                    <td><a href="'+res.data[key].roleObject.sresume+'" target="_blank">在线浏览</a></td>\n' +
                     '                </tr>\n' +
                     '            </table>\n' +
                     '            <table>\n' +
@@ -218,7 +220,6 @@ function openResume() {
     }
 }
 function deleteSend(obj) {
-    console.log(obj.id.match(/pid_(\S*)/))
     let pid = obj.id.match(/pid_(\S*)/)[1]
     $.ajax({
         url:'http://39.96.68.53:8080/positionController/deletePosition',
@@ -241,5 +242,8 @@ function deleteSend(obj) {
 }
 // let select = document.getElementsByClassName('select').style.display;
 
-
+function downResume(obj) {
+    let sid = $(obj).prev().val()
+    window.location.href="http://39.96.68.53:8080/user/downloadResume?sid="+sid
+}
 

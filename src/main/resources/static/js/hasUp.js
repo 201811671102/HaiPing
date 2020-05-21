@@ -44,7 +44,7 @@ function GetWorks(res) {
                     '                </div>\n' +
                     '                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 control">\n' +
                     '                    <div class="Lable">企业</div>\n' +
-                    '                    <div class="delect" onclick= delete(this)>删除</div>\n' +
+                    '                    <div class="upResume">'+static[res.data[key].spState]+'</div>\n' +
                     '                </div>\n' +
                     '            </div>')
             }else{

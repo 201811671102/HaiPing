@@ -25,16 +25,16 @@ public class UserServiceImpl implements UserService {
         UserExample userExample = new UserExample();
         userExample.createCriteria().andUaccountEqualTo(account);
         try {
-            if (redisUtil.hasKey("haiping"+account)){
+           /* if (redisUtil.hasKey("haiping"+account)){
                 return (User) redisUtil.get("haiping"+account);
-            }
+            }*/
             List<User> userList =  userMapper.selectByExample(userExample);
             if (userList.size()>1){
                 log.info("UserServiceImpl:selectByAccount 用户账号出现重复");
             }else if (userList.size() == 0){
                 return null;
             }
-            redisUtil.set("haiping"+account,userList.get(0));
+          /*  redisUtil.set("haiping"+account,userList.get(0));*/
             return userList.get(0);
         }catch (NullPointerException e){
                 return null;

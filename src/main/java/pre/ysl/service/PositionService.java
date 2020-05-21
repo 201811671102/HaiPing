@@ -18,5 +18,5 @@ public interface PositionService {
     /*修改招聘岗位*/
     int updatePosition(Position position) throws IOException;
     /*根据属性查询岗位*/
-    List<Position> getPosititonByAttribute(Integer lowprice,Integer heightprice,Position position,Integer start,Integer size,Integer sort) throws IOException;
+    List<Position> getPosititonByAttribute(String pName,Integer start,Integer size) throws IOException;
 }

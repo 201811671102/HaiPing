@@ -201,21 +201,23 @@ public class UserController {
            }
            return SendCode(email,4);
        }catch (Exception e){
+           e.printStackTrace();
            log.info(e.toString());
            return new ResultUtil().Error("500",e.toString());
        }
     }
 
 
-    @PutMapping("/userFindPassword")
+    @PostMapping("/userFindPassword")
+    @ResponseBody
     @ApiOperation(value = "修改新密码",notes = "400 验证码错误 401 超时，验证码无效 500 报错")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query",name = "uaccount",value = "用户账户",required = true,dataType = "String"),
             @ApiImplicitParam(paramType = "query",name = "uemail",value = "用户邮箱",required = true,dataType = "String"),
             @ApiImplicitParam(paramType = "query",name = "upassword",value = "用户新密码",required = true,dataType = "String"),
-            @ApiImplicitParam(paramType = "query",name = "code",value = "验证码",required = true,dataType = "String"),
+            @ApiImplicitParam(paramType = "query",name = "code",value = "验证码",required = true,dataType = "String")
     })
-    public ResultDTO userFindPassword(String uemail,@RequestParam String uaccount,String upassword,String code){
+    public ResultDTO userFindPassword(String uaccount,String uemail,String upassword,String code){
         try {
             if (redisUtil.hasKey("haiping"+uemail)){
                 if (redisUtil.get("haiping"+uemail).equals(code)){
@@ -278,7 +280,7 @@ public class UserController {
             @ApiParam(value = "用户类型",required = true)@RequestParam(value = "rid",required = true) Integer rid){
         try {
             User user = new User();
-            if (redisUtil.hasKey("haiping"+uemail)){
+            if (redisUtil.hasKey("haiping"+uemail) && redisUtil.getExpire("haiping"+uemail)>0){
                 if (redisUtil.get("haiping"+uemail).equals(code)){
                     user.setUaccount(uaccount);
                     user.setUpassword(upassword);
@@ -343,6 +345,9 @@ public class UserController {
             @ApiParam(value = "学生id",required = true)@RequestParam(value = "sid",required = true)Integer sid,
             @ApiParam(value = "简历",required = true)@RequestParam(value = "resume",required = true)MultipartFile resume){
         try {
+            if ( -1 == resume.getOriginalFilename().lastIndexOf(".pdf")){
+                return new ResultUtil().Error("400","非pdf文件");
+            }
             Student student = studentService.selectBySid(sid);
             ftpOperation.connectToServer();
             //删除原有简历
@@ -352,16 +357,17 @@ public class UserController {
                 ftpOperation.delectFile(filename,"/resume");
             }
             String resumename = UUID.randomUUID().toString().replace("-","")+resume.getOriginalFilename();
-            student.setSresume("ftp://39.96.68.53:6060/resume/"+ resumename);
+            student.setSresume("http://39.96.68.53:70/"+ resumename);
             ftpOperation.uploadToFtp(resume.getInputStream(),resumename,"/resume");
-            ftpOperation.closeConnect();
             studentService.updateStudentinfo(student);
+            ftpOperation.closeConnect();
             return new ResultUtil().Success();
         }catch (Exception e){
             log.info(e.toString());
             return new ResultUtil().Error("500",e.toString());
         }
     }
+
     @GetMapping("/ifAlreadyUPResume")
     @ResponseBody
     @ApiOperation(value = "查看学生是否已经上传简历",notes = "400 没有上传 500 报错")
@@ -427,6 +433,7 @@ public class UserController {
             ftpOperation.closeConnect();
             return null;
         }catch (Exception e){
+            e.printStackTrace();
             log.info(e.toString());
             return new ResultUtil().Error("500",e.toString());
         }finally {
@@ -529,14 +536,13 @@ public class UserController {
            if (spService.selectBySp(pid,sid,-1) != null){
                return new ResultUtil().Error("403","不能在等待回应状态重复投递简历");
            }
-           SP sp  = new SP();
-           sp.setPid(pid);
-           sp.setSid(student.getSid());
-           sp.setSepcstate(0);
-           spService.insertSP(sp);
-           sepc.setSepctype(0);
-           sepcService.updateSEPCByid(sepc);
-           if (!StringUtils.isBlank(student.getSresume())){
+           if (StringUtils.isNotEmpty(student.getSresume()) && student.getSresume() != ""){
+               SP sp  = new SP();
+               sp.setPid(pid);
+               sp.setSid(student.getSid());
+               sp.setSepcstate(0);
+               spService.insertSP(sp);
+
                MailBase mailBase = new MailBase();
                mailBase.setSubject("海聘:有一名学生向您递交了一份简历，请查看");
                mailBase.setContent(student.getSname()+"的简历");

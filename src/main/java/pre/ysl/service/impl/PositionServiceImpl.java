@@ -87,25 +87,15 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public List<Position> getPosititonByAttribute(
-            Integer lowprice,
-            Integer heightprice,
-            Position position,
+            String pName,
             Integer start,
-            Integer size,
-            Integer sort) throws IOException {
+            Integer size) throws IOException {
         try {
             RowBounds rowBounds = new RowBounds(start,size);
             PositionExample positionExample = new PositionExample();
             PositionExample.Criteria criteria = positionExample.createCriteria();
-            criteria.andPcompensationLessThanOrEqualTo(heightprice);
-            criteria.andPcompensationGreaterThanOrEqualTo(lowprice);
-            if (sort == 0){
-                positionExample.setOrderByClause("pcompensation asc");
-            }else{
-                positionExample.setOrderByClause("pcompensation desc");
-            }
-            List<Position> positions = positionMapper.selectByExampleWithRowbounds(positionExample,rowBounds);
-            return positions;
+            criteria.andPnameLike("%"+pName+"%");
+            return positionMapper.selectByExampleWithRowbounds(positionExample,rowBounds);
         }catch (NullPointerException e){
             return null;
         }catch (Exception e){

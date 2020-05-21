@@ -13,15 +13,15 @@ spring:
   redis:
     port: 6379
     database: 0
-    host: 39.96.68.53
+    host: localhost
     password:
     jedis:
       pool:
-        max-active: 200
+        max-active: 50
         max-wait: -1ms
         max-idle: 1
         min-idle: 0
-    timeout: 1000
+    timeout: 10000
 
   liquibase:
     contexts: dev #表示liquibase引用的脚本的上下文，要是项目中多个环境的话【比如，研发，测试，生产等】可以配置这个，否则请略过

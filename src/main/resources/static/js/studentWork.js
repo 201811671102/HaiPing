@@ -125,3 +125,65 @@ function sendResume(obj) {
         }
     })
 }
+
+$("#seachButton").click(function () {
+    page = 0;
+    searchWork(page);
+})
+
+function searchWork(page){
+    $(".Search").siblings().remove();
+    $.ajax({
+        url: 'http://39.96.68.53:8080/positionController/showPositionByAttribute',
+        type:'get',
+        data: {
+            uid:JSON.parse($.cookie("user")).uid,
+            start:page,
+            size:10,
+            pName:$("#seachValue").val()
+        },
+        success:function(res) {
+            if (res.code == 401){
+                PromptBox.displayPromptBox('请先进行学生认证')
+                $(location).attr('href', '../html/authStudent.html')
+            }
+            for (let key = 0;key<res.data.length;key++){
+                $("#workText").append('<div class="container-fluid content" id = "work_'+res.data[key].pid+'">\n' +
+                    '                <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7">\n' +
+                    '                    <div class="work">'+res.data[key].ptype+'—'+res.data[key].pname+'</div>\n' +
+                    '                    <div class="container-fluid workInfo">\n' +
+                    '                        <div>'+'薪 '+res.data[key].pcompensation+'</div>\n' +
+                    '                        <div class="gan">|</div>\n' +
+                    '                        <div>'+res.data[key].paddress+'</div>\n' +
+                    '                        <div class="gan">|</div>\n' +
+                    '                        <div>福利 '+res.data[key].pwelfare+'</div>\n' +
+                    '                        <div class="gan">|</div>\n' +
+                    '                        <div>5年经验</div>\n' +
+                    '                    </div>\n' +
+                    '                    <div>'+res.data[key].prequirements+'</div>\n' +
+                    '                </div>\n' +
+                    '                <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3 enterprise">\n' +
+                    '                    <div>'+res.data[key].userObject.roleObject.ename+'</div>\n' +
+                    '                    <div>'+res.data[key].userObject.roleObject.eintroduction+'</div>\n' +
+                    '                </div>\n' +
+                    '                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 control">\n' +
+                    '                    <div class="Lable">企业</div>\n' +
+                    '                    <div class="upResume" id="'+res.data[key].pid+'~'+res.data[key].userObject.uaccount+'" onclick = sendResume(this)>投简历</div>\n' +
+                    '                    <div class="delect"  id="D'+res.data[key].pid+'"  onclick= deleteWork(this)>删除</div>\n' +
+                    '                    <div class="addTalker" id="'+res.data[key].userObject.uid+'~'+res.data[key].userObject.uaccount+'~'+res.data[key].userObject.uphoto+'" onclick = addtalker(this)>联系他</div>\n' +
+                    '                </div>\n' +
+                    '            </div>')
+            }
+            if (user.role != 1){
+                $(".upResume").css({
+                    'display':'none'
+                })
+            }
+            if (user.role  != 4){
+                $(".delect").css({
+                    'display':'none'
+                })
+            }
+        }
+    })
+}

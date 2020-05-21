@@ -42,8 +42,8 @@ $("#addResume").click(function () {
         data:form,
         processData:false,
         success:function(res){
-            if (res.code == 403){
-                PromptBox.displayPromptBox('该用户不是学生')
+            if (res.code == 400){
+                PromptBox.displayPromptBox('请上传pdf文件')
             }
             $(".add").css({'display':'none'})
             PromptBox.displayPromptBox('上传简历成功')

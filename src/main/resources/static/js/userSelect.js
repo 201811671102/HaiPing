@@ -42,10 +42,10 @@ if ($.cookie('user')){
         '                </div>\n' +
         '            </div>\n' +
         '            <div class="container-fluid operation" id="etpsResume">\n' +
-        '                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="getResume">\n' +
+/*        '                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="getResume">\n' +
         '                    <span class="glyphicon glyphicon-edit"></span>\n' +
         '                    收到简历\n' +
-        '                </div>\n' +
+        '                </div>\n' +*/
         '                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="hasSend">\n' +
         '                    <span class="glyphicon glyphicon-align-left"></span>\n' +
         '                    已发职位\n' +

@@ -209,26 +209,11 @@ public class PositionController {
     @ApiOperation(value = "根据属性查询招聘职位",notes = "401 非已经认证学生 500 报错")
     public ResultDTO showPositionByAttribute(
             @ApiParam(value = "用户id",required = true)@RequestParam(value = "uid",required = true)Integer uid,
-            @ApiParam(value = "页码",required = true)@RequestParam(value = "start",required = false)Integer start,
-            @ApiParam(value = "条数",required = true)@RequestParam(value = "size",required = false)Integer size,
-            @ApiParam(value = "职位名字",required = false)@RequestParam(value = "pName",required = false)String pName,
-            @ApiParam(value = "职位分类",required = false)@RequestParam(value = "pType",required = false)String pType,
-            @ApiParam(value = "职位描述",required = false)@RequestParam(value = "pDescribe",required = false)String pDescribe,
-            @ApiParam(value = "职位要求",required = false)@RequestParam(value = "pRequirements",required = false)String pRequirements,
-            @ApiParam(value = "薪酬排序 0 升序 1 降序",required = true)@RequestParam(value = "sort",required = true)Integer sort,
-            @ApiParam(value = "职位起始薪酬",required = false)@RequestParam(value = "lowprice",required = false)Integer lowprice,
-            @ApiParam(value = "职位最高薪酬",required = false)@RequestParam(value = "heightprice",required = false)Integer heightprice,
-            @ApiParam(value = "职位福利",required = false)@RequestParam(value = "pWelfare",required = false)String pWelfare,
-            @ApiParam(value = "职位工作地址",required = false)@RequestParam(value = "pAddress",required = false)String pAddress){
-        Position position = new Position();
-        if (!StringUtils.isEmpty(pName))position.setPname(pName);
-        if (!StringUtils.isEmpty(pAddress))position.setPaddress(pAddress);
-        if (!StringUtils.isEmpty(pWelfare))position.setPwelfare(pWelfare);
-        if (!StringUtils.isEmpty(pRequirements))position.setPrequirements(pRequirements);
-        if (!StringUtils.isEmpty(pDescribe))position.setPdescribe(pDescribe);
-        if (!StringUtils.isEmpty(pType))position.setPtype(pType);
+            @ApiParam(value = "页码",required = true)@RequestParam(value = "start",required = true)Integer start,
+            @ApiParam(value = "条数",required = true)@RequestParam(value = "size",required = true)Integer size,
+            @ApiParam(value = "职位名字",required = true)@RequestParam(value = "pName",required = true)String pName){
         try {
-            List<Position> positionList = positionService.getPosititonByAttribute(lowprice,heightprice,position,start,size,sort);
+            List<Position> positionList = positionService.getPosititonByAttribute(pName,start,size);
             UR ur = urService.selectByUid(uid);
             List<PositionDTO> positionDTOList = new ArrayList<>();
             UserDTO userDTO = new UserDTO();
@@ -355,9 +340,10 @@ public class PositionController {
                     return new ResultUtil().Success(positionDTOList);
             }
             return new ResultUtil().Success();
-        }catch (NullPointerException e){
+        }catch (IndexOutOfBoundsException e){
             return new ResultUtil().Success();
         }catch (Exception e){
+            e.printStackTrace();
             log.info(e.toString());
             return new ResultUtil().Error("500",e.toString());
         }
